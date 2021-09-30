@@ -3,7 +3,7 @@
          colors="true"
          convertWarningsToExceptions="true"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-    <coverage>
+    <coverage pathCoverage="true">
         <include>
             <directory suffix=".php">src/</directory>
         </include>

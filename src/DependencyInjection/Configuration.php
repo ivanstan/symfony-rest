@@ -5,6 +5,9 @@ namespace Ivanstan\SymfonyRest\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Configuration implements ConfigurationInterface
 {
     public const ROOT_CONFIG = 'symfony_rest';

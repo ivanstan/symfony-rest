@@ -17,8 +17,8 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
 
     public function __construct(protected ParameterBagInterface $parameters)
     {
-        $this->paths = $this->parameters->get('symfony_rest.exception_subscriber')['paths'];
         $this->env = strtolower((string)$parameters->get('kernel.environment'));
+        $this->paths = $this->parameters->get('symfony_rest.exception_subscriber')['paths'];
     }
 
     public static function getSubscribedEvents(): array
