@@ -1,0 +1,6 @@
+services:
+  symfony_rest.exception_subscriber:
+    class: Ivanstan\SymfonyRest\EventSubscriber\ApiExceptionSubscriber
+    arguments: ['@parameter_bag']
+    tags:
+      - { name: kernel.event_subscriber }
