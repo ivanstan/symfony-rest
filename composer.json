@@ -24,6 +24,6 @@
     "phpunit/php-code-coverage": "^9.2"
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit"
+    "test": "php -dxdebug.mode=coverage ./vendor/bin/phpunit --coverage-text"
   }
 }
