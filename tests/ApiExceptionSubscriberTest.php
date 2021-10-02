@@ -52,6 +52,16 @@ class ApiExceptionSubscriberTest extends TestCase
         self::assertArrayHasKey('trace', $response['response']['exception']);
     }
 
+    public function testEmptyPathParam(): void
+    {
+        $params = $this->parameterBagFactory('dev', []);
+        $event = $this->exceptionEventFactory(Request::create('/api'), new \Exception('Text'));
+
+        (new ApiExceptionSubscriber($params))->onException($event);
+
+        self::assertNull($event->getResponse());
+    }
+
     protected function exceptionEventFactory(Request $request, \Throwable $e): ExceptionEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);
