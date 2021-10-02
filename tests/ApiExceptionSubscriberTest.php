@@ -21,10 +21,7 @@ class ApiExceptionSubscriberTest extends TestCase
 
         $kernel = $this->createMock(HttpKernelInterface::class);
 
-        $request = $this->createMock(Request::class);
-        $request->method('getPathInfo')->willReturn('/api');
-
-        $event = new ExceptionEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST, new BadRequestHttpException());
+        $event = new ExceptionEvent($kernel, Request::create('/api'), HttpKernelInterface::MAIN_REQUEST, new BadRequestHttpException());
 
         (new ApiExceptionSubscriber($params))->onException($event);
 
@@ -40,10 +37,8 @@ class ApiExceptionSubscriberTest extends TestCase
 
         $kernel = $this->createMock(HttpKernelInterface::class);
 
-        $request = $this->createMock(Request::class);
-        $request->method('getPathInfo')->willReturn('/api');
-
-        $event = new ExceptionEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST, new BadRequestHttpException('Text'));
+        $event =
+            new ExceptionEvent($kernel, Request::create('/api'), HttpKernelInterface::MAIN_REQUEST, new BadRequestHttpException('Text'));
 
         (new ApiExceptionSubscriber($params))->onException($event);
 
@@ -61,10 +56,7 @@ class ApiExceptionSubscriberTest extends TestCase
 
         $kernel = $this->createMock(HttpKernelInterface::class);
 
-        $request = $this->createMock(Request::class);
-        $request->method('getPathInfo')->willReturn('/api');
-
-        $event = new ExceptionEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST, new \Exception('Text'));
+        $event = new ExceptionEvent($kernel, Request::create('/api'), HttpKernelInterface::MAIN_REQUEST, new \Exception('Text'));
 
         (new ApiExceptionSubscriber($params))->onException($event);
 
