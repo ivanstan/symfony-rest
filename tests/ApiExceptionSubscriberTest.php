@@ -14,14 +14,8 @@ class ApiExceptionSubscriberTest extends TestCase
 {
     public function testRequestNotIntercepted(): void
     {
-        $params = $this->createMock(ParameterBag::class);
-        $params->method('get')
-            ->withConsecutive(['kernel.environment'], ['symfony_rest.exception_subscriber'])
-            ->willReturnOnConsecutiveCalls('prod', ['paths' => ['/bla']]);
-
-        $kernel = $this->createMock(HttpKernelInterface::class);
-
-        $event = new ExceptionEvent($kernel, Request::create('/api'), HttpKernelInterface::MAIN_REQUEST, new BadRequestHttpException());
+        $params = $this->parameterBagFactory('prod', ['/api']);
+        $event = $this->exceptionEventFactory(Request::create('/bla'), new BadRequestHttpException());
 
         (new ApiExceptionSubscriber($params))->onException($event);
 
@@ -30,15 +24,8 @@ class ApiExceptionSubscriberTest extends TestCase
 
     public function testRequestIntercepted(): void
     {
-        $params = $this->createMock(ParameterBag::class);
-        $params->method('get')
-            ->withConsecutive(['kernel.environment'], ['symfony_rest.exception_subscriber'])
-            ->willReturnOnConsecutiveCalls('prod', ['paths' => ['/api']]);
-
-        $kernel = $this->createMock(HttpKernelInterface::class);
-
-        $event =
-            new ExceptionEvent($kernel, Request::create('/api'), HttpKernelInterface::MAIN_REQUEST, new BadRequestHttpException('Text'));
+        $params = $this->parameterBagFactory('prod', ['/api']);
+        $event = $this->exceptionEventFactory(Request::create('/api'), new BadRequestHttpException('Text'));
 
         (new ApiExceptionSubscriber($params))->onException($event);
 
@@ -49,14 +36,8 @@ class ApiExceptionSubscriberTest extends TestCase
 
     public function testRequestInterceptedDevEnv(): void
     {
-        $params = $this->createMock(ParameterBag::class);
-        $params->method('get')
-            ->withConsecutive(['kernel.environment'], ['symfony_rest.exception_subscriber'])
-            ->willReturnOnConsecutiveCalls('dev', ['paths' => ['/api']]);
-
-        $kernel = $this->createMock(HttpKernelInterface::class);
-
-        $event = new ExceptionEvent($kernel, Request::create('/api'), HttpKernelInterface::MAIN_REQUEST, new \Exception('Text'));
+        $params = $this->parameterBagFactory('dev', ['/api']);
+        $event = $this->exceptionEventFactory(Request::create('/api'), new \Exception('Text'));
 
         (new ApiExceptionSubscriber($params))->onException($event);
 
@@ -69,5 +50,22 @@ class ApiExceptionSubscriberTest extends TestCase
         self::assertArrayHasKey('file', $response['response']['exception']);
         self::assertArrayHasKey('message', $response['response']['exception']);
         self::assertArrayHasKey('trace', $response['response']['exception']);
+    }
+
+    protected function exceptionEventFactory(Request $request, \Throwable $e): ExceptionEvent
+    {
+        $kernel = $this->createMock(HttpKernelInterface::class);
+
+        return new ExceptionEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST, $e);
+    }
+
+    protected function parameterBagFactory(string $env, array $paths): ParameterBag
+    {
+        $params = $this->createMock(ParameterBag::class);
+        $params->method('get')
+            ->withConsecutive(['kernel.environment'], ['symfony_rest.exception_subscriber'])
+            ->willReturnOnConsecutiveCalls($env, ['paths' => $paths]);
+
+        return $params;
     }
 }
