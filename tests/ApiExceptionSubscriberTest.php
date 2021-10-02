@@ -73,9 +73,9 @@ class ApiExceptionSubscriberTest extends TestCase
         self::assertEquals('Text', $response['response']['message']);
         self::assertArrayHasKey('exception', $response['response']);
 
-        self::assertArrayHasKey('code', $response['exception']);
-        self::assertArrayHasKey('file', $response['exception']);
-        self::assertArrayHasKey('message', $response['exception']);
-        self::assertArrayHasKey('trace', $response['exception']);
+        self::assertArrayHasKey('code', $response['response']['exception']);
+        self::assertArrayHasKey('file', $response['response']['exception']);
+        self::assertArrayHasKey('message', $response['response']['exception']);
+        self::assertArrayHasKey('trace', $response['response']['exception']);
     }
 }

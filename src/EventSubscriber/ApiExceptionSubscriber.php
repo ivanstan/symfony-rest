@@ -21,6 +21,9 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
         $this->paths = $this->parameters->get('symfony_rest.exception_subscriber')['paths'];
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function getSubscribedEvents(): array
     {
         return [
