@@ -1,6 +1,9 @@
 services:
-  symfony_rest.exception_subscriber:
-    class: Ivanstan\SymfonyRest\EventSubscriber\ApiExceptionSubscriber
+  Ivanstan\SymfonyRest\EventSubscriber\ApiExceptionSubscriber:
     arguments: ['@parameter_bag']
     tags:
       - { name: kernel.event_subscriber }
+
+  Ivanstan\SymfonyRest\Command:
+    resource: '../../AppBundle/Command/*'
+    tags: ['console.command']
