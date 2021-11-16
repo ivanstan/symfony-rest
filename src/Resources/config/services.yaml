@@ -4,6 +4,12 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
-  Ivanstan\SymfonyRest\Command:
-    resource: '../../AppBundle/Command/*'
-    tags: ['console.command']
+  Ivanstan\SymfonyRest\Command\DoctrineReloadCommand:
+    arguments: ['@parameter_bag']
+    tags:
+      - { name: console.command }
+
+  Ivanstan\SymfonyRest\:
+    resource: '../../'
+    autowire: true
+    autoconfigure: true

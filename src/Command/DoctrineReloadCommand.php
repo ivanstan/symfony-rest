@@ -4,6 +4,7 @@ namespace Ivanstan\SymfonyRest\Command;
 
 use Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
+use Doctrine\Migrations\Tools\Console\Command\MigrateCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -13,6 +14,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 #[AsCommand(
     name: 'doctrine:reload', description: 'Purge database, execute migrations and load fixtures'
@@ -32,10 +34,13 @@ final class DoctrineReloadCommand extends Command
     protected static $defaultDescription = 'Reloads test database';
 
     protected Application $application;
+    protected string $env;
 
-    public function __construct(private $env)
+    public function __construct(protected ParameterBagInterface $parameters)
     {
         parent::__construct();
+        
+        $this->env = strtolower((string)$parameters->get('kernel.environment'));
     }
 
     protected function configure(): void
@@ -77,7 +82,7 @@ final class DoctrineReloadCommand extends Command
             $io->writeln('Create database');
             $this->call('doctrine:database:create', ['--if-not-exists' => true]);
 
-            if (class_exists(MigrationsMigrateDoctrineCommand::class)) {
+            if (class_exists(MigrateCommand::class)) {
                 $io->writeln('Execute migrations');
                 $this->call('doctrine:migrations:migrate', ['--no-interaction' => true]);
             }

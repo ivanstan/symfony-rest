@@ -1,7 +1,5 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Tests;
-
 use Ivanstan\SymfonyRest\EventSubscriber\ApiExceptionSubscriber;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
