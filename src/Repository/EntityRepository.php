@@ -1,10 +1,10 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Repository;
+namespace Ivanstan\SymfonySupport\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
-use Ivanstan\SymfonyRest\Services\ApiEntityMetadata;
+use Ivanstan\SymfonySupport\Services\ApiEntityMetadata;
 
 class EntityRepository
 {

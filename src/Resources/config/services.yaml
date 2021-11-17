@@ -1,15 +1,15 @@
 services:
-  Ivanstan\SymfonyRest\EventSubscriber\ApiExceptionSubscriber:
+  Ivanstan\SymfonySupport\EventSubscriber\ApiExceptionSubscriber:
     arguments: ['@parameter_bag']
     tags:
       - { name: kernel.event_subscriber }
 
-  Ivanstan\SymfonyRest\Command\DoctrineReloadCommand:
+  Ivanstan\SymfonySupport\Command\DoctrineReloadCommand:
     arguments: ['@parameter_bag']
     tags:
       - { name: console.command }
 
-  Ivanstan\SymfonyRest\:
+  Ivanstan\SymfonySupport\:
     resource: '../../'
     autowire: true
     autoconfigure: true

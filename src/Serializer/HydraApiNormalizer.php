@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Serializer;
+namespace Ivanstan\SymfonySupport\Serializer;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

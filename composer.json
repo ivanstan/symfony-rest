@@ -1,6 +1,6 @@
 {
-  "name": "ivanstan/symfony-rest",
-  "description": "Symfony REST API toolkit",
+  "name": "ivanstan/symfony-support",
+  "description": "Symfony support API toolkit",
   "type": "symfony-bundle",
   "require": {
     "php": ">=8.0",
@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Ivanstan\\SymfonyRest\\": "src/"
+      "Ivanstan\\SymfonySupport\\": "src/"
     }
   },
   "license": "MIT",

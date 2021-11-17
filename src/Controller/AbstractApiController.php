@@ -1,11 +1,11 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Controller;
+namespace Ivanstan\SymfonySupport\Controller;
 
-use Ivanstan\SymfonyRest\Services\ApiEntityMetadata;
-use Ivanstan\SymfonyRest\Services\Util\ClassUtil;
-use Ivanstan\SymfonyRest\Traits\EntityRepositoryAwareTrait;
-use Ivanstan\SymfonyRest\Traits\NormalizerAwareTrait;
+use Ivanstan\SymfonySupport\Services\ApiEntityMetadata;
+use Ivanstan\SymfonySupport\Services\Util\ClassUtil;
+use Ivanstan\SymfonySupport\Traits\EntityRepositoryAwareTrait;
+use Ivanstan\SymfonySupport\Traits\NormalizerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

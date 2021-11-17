@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Attributes;
+namespace Ivanstan\SymfonySupport\Attributes;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
 class Api

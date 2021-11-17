@@ -1,9 +1,9 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Field;
+namespace Ivanstan\SymfonySupport\Field;
 
 use Doctrine\ORM\Mapping as ORM;
-use Ivanstan\SymfonyRest\Services\DateTimeService;
+use Ivanstan\SymfonySupport\Services\DateTimeService;
 
 trait UpdatedAtTrait
 {

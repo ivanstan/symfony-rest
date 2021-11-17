@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Field;
+namespace Ivanstan\SymfonySupport\Field;
 
 use Doctrine\ORM\Mapping as ORM;
 

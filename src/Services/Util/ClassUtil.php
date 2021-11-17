@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Services\Util;
+namespace Ivanstan\SymfonySupport\Services\Util;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 

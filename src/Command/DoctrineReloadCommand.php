@@ -1,9 +1,8 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Command;
+namespace Ivanstan\SymfonySupport\Command;
 
 use Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand;
-use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use Doctrine\Migrations\Tools\Console\Command\MigrateCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;

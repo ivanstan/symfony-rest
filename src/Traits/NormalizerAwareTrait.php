@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Traits;
+namespace Ivanstan\SymfonySupport\Traits;
 
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Service\Attribute\Required;

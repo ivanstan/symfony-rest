@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest;
+namespace Ivanstan\SymfonySupport;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

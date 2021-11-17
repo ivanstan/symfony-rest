@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\EventSubscriber;
+namespace Ivanstan\SymfonySupport\EventSubscriber;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

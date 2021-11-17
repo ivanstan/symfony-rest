@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Traits;
+namespace Ivanstan\SymfonySupport\Traits;
 
-use Ivanstan\SymfonyRest\Repository\EntityRepository;
+use Ivanstan\SymfonySupport\Repository\EntityRepository;
 use Symfony\Contracts\Service\Attribute\Required;
 
 /**
@@ -13,9 +13,8 @@ trait EntityRepositoryAwareTrait
     protected EntityRepository $repository;
 
     #[Required]
-    public function setEntityRepository(
-        EntityRepository $repository
-    ): void {
+    public function setEntityRepository(EntityRepository $repository): void
+    {
         $this->repository = $repository;
     }
 }

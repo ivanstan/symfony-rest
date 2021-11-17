@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Serializer;
+namespace Ivanstan\SymfonySupport\Serializer;
 
-use Ivanstan\SymfonyRest\Services\QueryBuilderPaginator;
+use Ivanstan\SymfonySupport\Services\QueryBuilderPaginator;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Services;
+namespace Ivanstan\SymfonySupport\Services;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;

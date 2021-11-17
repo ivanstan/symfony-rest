@@ -1,11 +1,11 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Services;
+namespace Ivanstan\SymfonySupport\Services;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Ivanstan\SymfonyRest\Attributes\Api;
-use Ivanstan\SymfonyRest\Services\Util\ClassUtil;
-use Ivanstan\SymfonyRest\Services\Util\DoctrineUtil;
+use Ivanstan\SymfonySupport\Attributes\Api;
+use Ivanstan\SymfonySupport\Services\Util\ClassUtil;
+use Ivanstan\SymfonySupport\Services\Util\DoctrineUtil;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 
 class ApiEntityMetadata

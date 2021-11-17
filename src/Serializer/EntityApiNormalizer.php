@@ -1,10 +1,10 @@
 <?php
 
-namespace Ivanstan\SymfonyRest\Serializer;
+namespace Ivanstan\SymfonySupport\Serializer;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ivanstan\SymfonyRest\Services\ApiEntityMetadata;
-use Ivanstan\SymfonyRest\Services\Util\DoctrineUtil;
+use Ivanstan\SymfonySupport\Services\ApiEntityMetadata;
+use Ivanstan\SymfonySupport\Services\Util\DoctrineUtil;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
