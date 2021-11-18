@@ -1,4 +1,4 @@
-# Symfony REST
+# Symfony support
 
 ### Installation
 
