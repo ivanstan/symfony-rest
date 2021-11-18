@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonySupport\Serializer;
+namespace Ivanstan\SymfonySupport\Normalizer;
 
 use Ivanstan\SymfonySupport\Services\QueryBuilderPaginator;
 use Symfony\Component\HttpFoundation\RequestStack;

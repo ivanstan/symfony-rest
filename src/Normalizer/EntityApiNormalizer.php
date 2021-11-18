@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonySupport\Serializer;
+namespace Ivanstan\SymfonySupport\Normalizer;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ivanstan\SymfonySupport\Services\ApiEntityMetadata;

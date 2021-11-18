@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivanstan\SymfonySupport\Serializer;
+namespace Ivanstan\SymfonySupport\Normalizer;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

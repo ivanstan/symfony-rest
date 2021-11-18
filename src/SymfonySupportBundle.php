@@ -4,6 +4,6 @@ namespace Ivanstan\SymfonySupport;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SymfonyRestBundle extends Bundle
+class SymfonySupportBundle extends Bundle
 {
 }
