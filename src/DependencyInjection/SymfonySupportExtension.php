@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * @codeCoverageIgnore
  */
-class SymfonyRestExtension extends Extension
+class SymfonySupportExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
