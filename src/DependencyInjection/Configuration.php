@@ -10,11 +10,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public const ROOT_CONFIG = 'symfony_rest';
+    public const ROOT_CONFIG = 'symfony_support';
 
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('symfony_rest');
+        $treeBuilder = new TreeBuilder(self::ROOT_CONFIG);
 
         $treeBuilder->getRootNode()
             ->children()

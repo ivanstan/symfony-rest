@@ -5,7 +5,7 @@
 ### Configuration
 
 ```yaml
-symfony_rest:
+symfony_support:
   exception_subscriber:
     # Paths under which exception subscriber will intercept Http exceptions
     paths:
