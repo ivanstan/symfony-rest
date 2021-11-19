@@ -5,9 +5,9 @@ namespace Ivanstan\SymfonySupport\Controller;
 use Ivanstan\SymfonySupport\Services\ApiEntityMetadata;
 use Ivanstan\SymfonySupport\Services\Util\ClassUtil;
 use Ivanstan\SymfonySupport\Traits\EntityRepositoryAwareTrait;
-use Ivanstan\SymfonySupport\Traits\NormalizerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 
 class AbstractApiController extends AbstractController
 {

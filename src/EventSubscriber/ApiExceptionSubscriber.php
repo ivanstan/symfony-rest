@@ -19,8 +19,8 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
     {
         $this->env = strtolower((string)$parameters->get('kernel.environment'));
 
-        if ($this->parameters->has('symfony_rest.exception_subscriber')) {
-            $this->paths = $this->parameters->get('symfony_rest.exception_subscriber')['paths'];
+        if ($this->parameters->has('symfony_support.exception_subscriber')) {
+            $this->paths = $this->parameters->get('symfony_support.exception_subscriber')['paths'];
         }
     }
 
@@ -30,11 +30,11 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::EXCEPTION => 'onException',
+            KernelEvents::EXCEPTION => 'onKernelException',
         ];
     }
 
-    public function onException(ExceptionEvent $event): void
+    public function onKernelException(ExceptionEvent $event): void
     {
         if (!$this->shouldIntercept($event->getRequest()->getPathInfo())) {
             return;

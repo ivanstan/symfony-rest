@@ -4,6 +4,11 @@ services:
     autowire: true
     autoconfigure: true
 
+  Ivanstan\SymfonySupport\Services\CustomRequestResolver:
+    arguments: ['@validator']
+    tags:
+      - { name: controller.argument_value_resolver, priority: 100 }
+
   Ivanstan\SymfonySupport\EventSubscriber\ApiExceptionSubscriber:
     arguments: ['@parameter_bag']
     tags:

@@ -7,11 +7,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 
-class CollectionApiNormalizer extends HydraApiNormalizer
+class CollectionApiNormalizer extends HydraApiNormalizer implements NormalizerAwareInterface
 {
-    public function __construct(protected RouterInterface $router, protected RequestStack $stack, ObjectNormalizer $normalizer)
+    use NormalizerAwareTrait;
+
+    public function __construct(protected RouterInterface $router, protected RequestStack $stack)
     {
     }
 
@@ -32,7 +35,7 @@ class CollectionApiNormalizer extends HydraApiNormalizer
                 '@id' => $this->router->generate($request->attributes->get('_route'), [], UrlGeneratorInterface::ABSOLUTE_URL),
                 '@type' => $object->getType(),
                 'totalItems' => $object->getTotal(),
-                'member' => $object->getCurrentPageResult(),
+                'member' => $this->normalizer->normalize($object->getCurrentPageResult()),
                 'parameters' => array_merge($request->request->all(), $request->query->all()),
                 'view' => $object->getView($request, $this->router),
             ]
@@ -41,6 +44,6 @@ class CollectionApiNormalizer extends HydraApiNormalizer
 
     public function supportsNormalization($data, string $format = null, array $context = [])
     {
-        return parent::supportsNormalization($data, $format, $context) && $data instanceof QueryBuilderPaginator;
+        return $data instanceof QueryBuilderPaginator;
     }
 }
