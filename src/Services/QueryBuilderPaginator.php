@@ -5,6 +5,7 @@ namespace Ivanstan\SymfonySupport\Services;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
+use Ivanstan\SymfonySupport\Request\CollectionRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -151,5 +152,12 @@ class QueryBuilderPaginator
     public function getType(): string
     {
         return $this->meta->getName() . '[]';
+    }
+
+    public function setFromRequest(CollectionRequest $request): void
+    {
+        $this
+            ->setPageSize($request->getPageSize())
+            ->setCurrentPage($request->getPage());
     }
 }
