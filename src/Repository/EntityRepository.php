@@ -2,21 +2,23 @@
 
 namespace Ivanstan\SymfonySupport\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Ivanstan\SymfonySupport\Services\ApiEntityMetadata;
 
-class EntityRepository
+class EntityRepository extends ServiceEntityRepository
 {
-    public function __construct(protected EntityManagerInterface $em)
+    public function __construct(ManagerRegistry $registry, string $entityClass)
     {
+        parent::__construct($registry, $entityClass);
     }
 
     public function get(string $entity, string $id)
     {
-        $meta = new ApiEntityMetadata($this->em->getClassMetadata($entity));
+        $meta = new ApiEntityMetadata($this->_em->getClassMetadata($entity));
 
-        $builder = $this->em->createQueryBuilder();
+        $builder = $this->_em->createQueryBuilder();
         $identifier = $meta->getIdentifier();
         $alias = $meta->getAlias();
 
@@ -32,11 +34,11 @@ class EntityRepository
 
     public function collection(string $name): QueryBuilder
     {
-        $meta = new ApiEntityMetadata($this->em->getClassMetadata($name));
+        $meta = new ApiEntityMetadata($this->_em->getClassMetadata($name));
 
         $alias = $meta->getAlias();
 
-        $builder = $this->em->createQueryBuilder();
+        $builder = $this->_em->createQueryBuilder();
 
         $builder->select($alias);
         $builder->from($meta->getFQN(), $alias);

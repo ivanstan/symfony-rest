@@ -1,6 +1,7 @@
 services:
   Ivanstan\SymfonySupport\:
     resource: '../../*'
+    exclude: '../../{Repository}'
     autowire: true
     autoconfigure: true
 
