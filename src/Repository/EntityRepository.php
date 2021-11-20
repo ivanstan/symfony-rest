@@ -9,18 +9,22 @@ use Ivanstan\SymfonySupport\Services\ApiEntityMetadata;
 
 class EntityRepository extends ServiceEntityRepository
 {
+    protected const SEARCH_QUERY_PARAM = 'search';
+
+    protected ApiEntityMetadata $meta;
+
     public function __construct(ManagerRegistry $registry, string $entityClass)
     {
         parent::__construct($registry, $entityClass);
+
+        $this->meta = new ApiEntityMetadata($this->_em->getClassMetadata($entityClass));
     }
 
     public function get(string $entity, string $id)
     {
-        $meta = new ApiEntityMetadata($this->_em->getClassMetadata($entity));
-
         $builder = $this->_em->createQueryBuilder();
-        $identifier = $meta->getIdentifier();
-        $alias = $meta->getAlias();
+        $identifier = $this->meta->getIdentifier();
+        $alias = $this->meta->getAlias();
 
         $builder->select($alias);
         $builder->from($entity, $alias);
@@ -32,29 +36,23 @@ class EntityRepository extends ServiceEntityRepository
         return $builder->getQuery()->getOneOrNullResult();
     }
 
-    public function collection(string $name): QueryBuilder
+    public function search(QueryBuilder $builder, array $fields, ?string $query): QueryBuilder
     {
-        $meta = new ApiEntityMetadata($this->_em->getClassMetadata($name));
+        if ($query === null || empty($query)) {
+            return $builder;
+        }
 
-        $alias = $meta->getAlias();
+        $conditions = array_map(
+            static fn($field) => \sprintf('%s LIKE :%s', $field, self::SEARCH_QUERY_PARAM),
+            $fields
+        );
 
-        $builder = $this->_em->createQueryBuilder();
+        $orX = $builder->expr()->orX();
+        $orX->addMultiple($conditions);
 
-        $builder->select($alias);
-        $builder->from($meta->getFQN(), $alias);
+        $builder->where($orX);
 
-//        if ($specification->search !== null) {
-//            $builder
-//                ->where(
-//                    $builder->expr()->orX(
-//                        $builder->expr()->like("$alias.email", $builder->expr()->literal('%' . $specification->search . '%'))
-//                    )
-//                );
-//        }
-//
-//        if ($specification->sort) {
-//            $builder->orderBy("$alias." . $specification->sort, $specification->sortDir ?? 'ASC');
-//        }
+        $builder->setParameter(self::SEARCH_QUERY_PARAM, '%'.$query.'%');
 
         return $builder;
     }
