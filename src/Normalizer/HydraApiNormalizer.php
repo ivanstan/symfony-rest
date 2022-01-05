@@ -24,7 +24,7 @@ class HydraApiNormalizer implements ContextAwareNormalizerInterface
         ];
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = [])
+    public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
         return ($context['hydra'] ?? null) === true;
     }

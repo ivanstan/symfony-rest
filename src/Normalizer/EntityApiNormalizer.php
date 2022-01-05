@@ -83,7 +83,7 @@ class EntityApiNormalizer extends HydraApiNormalizer
         return $data;
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = [])
+    public function supportsNormalization($data, string $format = null, array $context = []): bool
     {
         if (!is_object($data)) {
             return false;
