@@ -1,6 +1,6 @@
 <?php
 
-use Ivanstan\SymfonyRest\EventSubscriber\ApiExceptionSubscriber;
+use Ivanstan\SymfonySupport\EventSubscriber\ApiExceptionSubscriber;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ class ApiExceptionSubscriberTest extends TestCase
         $params = $this->parameterBagFactory('prod', ['/api']);
         $event = $this->exceptionEventFactory(Request::create('/bla'), new BadRequestHttpException());
 
-        (new ApiExceptionSubscriber($params))->onException($event);
+        (new ApiExceptionSubscriber($params))->onKernelException($event);
 
         self::assertNull($event->getResponse());
     }
@@ -25,7 +25,7 @@ class ApiExceptionSubscriberTest extends TestCase
         $params = $this->parameterBagFactory('prod', ['/api']);
         $event = $this->exceptionEventFactory(Request::create('/api'), new BadRequestHttpException('Text'));
 
-        (new ApiExceptionSubscriber($params))->onException($event);
+        (new ApiExceptionSubscriber($params))->onKernelException($event);
 
         $response = json_decode($event->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
@@ -37,7 +37,7 @@ class ApiExceptionSubscriberTest extends TestCase
         $params = $this->parameterBagFactory('dev', ['/api']);
         $event = $this->exceptionEventFactory(Request::create('/api'), new \Exception('Text'));
 
-        (new ApiExceptionSubscriber($params))->onException($event);
+        (new ApiExceptionSubscriber($params))->onKernelException($event);
 
         $response = json_decode($event->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
@@ -55,7 +55,7 @@ class ApiExceptionSubscriberTest extends TestCase
         $params = $this->parameterBagFactory('dev', []);
         $event = $this->exceptionEventFactory(Request::create('/api'), new \Exception('Text'));
 
-        (new ApiExceptionSubscriber($params))->onException($event);
+        (new ApiExceptionSubscriber($params))->onKernelException($event);
 
         self::assertNull($event->getResponse());
     }
