@@ -35,7 +35,7 @@ class CollectionApiNormalizer extends HydraApiNormalizer implements NormalizerAw
                 '@id' => $this->router->generate($request->attributes->get('_route'), [], UrlGeneratorInterface::ABSOLUTE_URL),
                 '@type' => $object->getType(),
                 'totalItems' => $object->getTotal(),
-                'member' => $this->normalizer->normalize($object->getCurrentPageResult()),
+                'member' => $this->normalizer->normalize($object->getCurrentPageResult(), $format, $context),
                 'parameters' => array_merge($request->request->all(), $request->query->all()),
                 'view' => $object->getView($request, $this->router),
             ]
