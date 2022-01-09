@@ -18,7 +18,7 @@ class EntityApiNormalizer extends HydraApiNormalizer
     ) {
     }
 
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = []): array
     {
         $data = parent::normalize($object, $format, $context);
 
@@ -33,9 +33,7 @@ class EntityApiNormalizer extends HydraApiNormalizer
             $data['@meta'] = $this->getRequestedMeta($metadata, $normalized);
         }
 
-        $data = array_merge($data, $normalized);
-
-        return $data;
+        return array_merge($data, $normalized);
     }
 
     protected function getEntityUrl($entity, ApiEntityMetadata $meta): ?string

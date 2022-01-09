@@ -23,7 +23,7 @@ class CollectionApiNormalizer extends HydraApiNormalizer implements NormalizerAw
      *
      * @throws ExceptionInterface
      */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = []): array
     {
         $request = $this->getRequest($context);
 
