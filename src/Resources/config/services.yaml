@@ -6,7 +6,7 @@ services:
     autoconfigure: true
 
   Ivanstan\SymfonySupport\Services\CustomRequestResolver:
-    arguments: ['@validator']
+    arguments: ['@validator', '@service_container']
     tags:
       - { name: controller.argument_value_resolver, priority: 100 }
 

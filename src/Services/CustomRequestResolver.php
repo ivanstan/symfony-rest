@@ -3,15 +3,19 @@
 namespace Ivanstan\SymfonySupport\Services;
 
 use Ivanstan\SymfonySupport\Request\AbstractRequest;
+use Psr\Container\ContainerInterface;
+use ReflectionClass;
+use ReflectionMethod;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CustomRequestResolver implements ArgumentValueResolverInterface
 {
-    public function __construct(protected ValidatorInterface $validator)
+    public function __construct(protected ValidatorInterface $validator, protected ContainerInterface $container)
     {
     }
 
@@ -29,6 +33,21 @@ class CustomRequestResolver implements ArgumentValueResolverInterface
         $customRequest->files = $request->files;
         $customRequest->request = $request->request;
 
+        // Call #[Required] methods.
+        foreach ((new ReflectionClass($customRequest::class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            foreach ($method->getAttributes() as $attribute) {
+                if ($attribute->getName() === Required::class) {
+
+                    $params = [];
+                    foreach ($method->getParameters() as $parameter) {
+                        $params[] = $this->container->get($parameter->getType()->getName());
+                    }
+                    call_user_func_array([$customRequest, $method->getName()], $params);
+                }
+            }
+        }
+
+        // Validate
         if (method_exists($customRequest, 'validate')) {
             $violations = $customRequest->validate($this->validator);
 
