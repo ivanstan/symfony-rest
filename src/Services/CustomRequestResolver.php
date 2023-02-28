@@ -26,12 +26,18 @@ class CustomRequestResolver implements ArgumentValueResolverInterface
 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
+        $class = $argument->getType();
+
         /** @var AbstractRequest $customRequest */
-        $customRequest = forward_static_call([$argument->getType(), 'createFromGlobals']);
-        $customRequest->attributes = $request->attributes;
-        $customRequest->query = $request->query;
-        $customRequest->files = $request->files;
-        $customRequest->request = $request->request;
+        $customRequest = new $class(
+            $request->query->all(),
+            $request->request->all(),
+            $request->attributes->all(),
+            $request->cookies->all(),
+            $request->files->all(),
+            $request->server->all(),
+            $request->getContent(),
+        );
 
         // Call #[Required] methods.
         foreach ((new ReflectionClass($customRequest::class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
